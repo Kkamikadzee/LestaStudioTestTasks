@@ -19,19 +19,22 @@ inline bool isEven2(int value)
     return !(value & 1);
 }
 
-void bench(std::function<bool(int)> f, unsigned int count)
+inline bool isEven3(int value)
+{
+    return value & 1 == 0;
+}
+
+void bench(std::function<bool(int)> f, int count)
 {
     unsigned int start_time, end_time;
 
     start_time = clock();
-    for (auto i = 0; i < count; ++i)
+
+    for (auto i = -count; i != count; ++i)
     {
-        f(0);
-        f(-1);
-        f(-2);
-        f(1);
-        f(2);
+        f(i);
     }
+
     end_time = clock();
 
     cout << (end_time - start_time) / 1000.0 << endl;
@@ -39,12 +42,13 @@ void bench(std::function<bool(int)> f, unsigned int count)
 
 int main()
 {
-    unsigned int count = 100000000;
+    int count = 100000000; 
     unsigned int start_time, end_time;
 
     bench(isEven0, count);
     bench(isEven1, count);
     bench(isEven2, count);
+    bench(isEven3, count);
 
     system("pause");
 
