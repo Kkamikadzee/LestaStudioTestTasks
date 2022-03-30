@@ -44,9 +44,9 @@ namespace Kmk
                 *valuePtr += *(valuePtr - 1);
 
             for (auto valuePtr = std::make_reverse_iterator(end); valuePtr != std::make_reverse_iterator(begin); ++valuePtr)
-                buffer[--valuesCount[GetBlockValue(*valuePtr, blockNumber, blockSize, numberValuesInBlock)]] = std::move(*valuePtr);
+                buffer[--valuesCount[GetBlockValue(*valuePtr, blockNumber, blockSize, numberValuesInBlock)]] = *valuePtr;
 
-            std::copy(std::make_move_iterator(buffer), std::make_move_iterator(buffer + bufferSize), begin);
+            std::copy(buffer, buffer + bufferSize, begin);
         }
     }
 
